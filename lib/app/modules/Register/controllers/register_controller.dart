@@ -39,11 +39,6 @@ class RegisterController extends GetxController {
 
       final uid = userCredential.user?.uid;
 
-      if (uid == null) {
-        Get.snackbar("Gagal", "Terjadi kesalahan, user ID tidak ditemukan.");
-        return; // Menghentikan eksekusi jika uid adalah null
-      }
-
       // Simpan username ke Firestore
       await firestore.collection('users').doc(uid).set({
         'username': username,
@@ -58,7 +53,7 @@ class RegisterController extends GetxController {
       } else if (e.code == "email-already-in-use") {
         Get.snackbar("Gagal", "Email sudah terdaftar!");
       }
-      print("FirebaseAuthException: ${e.code}");
+      print(e.code);
     } catch (e) {
       print("Error saat menyimpan username: $e");
       Get.snackbar(
