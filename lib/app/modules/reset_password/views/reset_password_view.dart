@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:myapp/app/routes/app_pages.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/reset_password_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+class ResetPasswordView extends GetView<ResetPasswordController> {
+  const ResetPasswordView({super.key});
   @override
   Widget build(BuildContext context) {
-    final LoginController controller = Get.put(LoginController());
     return Scaffold(
       body: Stack(
         children: [
@@ -34,7 +32,7 @@ class LoginView extends GetView<LoginController> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Login",
+                          "Reset \nPassword",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,
@@ -44,7 +42,7 @@ class LoginView extends GetView<LoginController> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Wellcome back, \nplease login your account",
+                          "Forgot your password?, \nplease create a new password",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -71,47 +69,18 @@ class LoginView extends GetView<LoginController> {
                       SizedBox(
                         height: 10,
                       ),
-                      Obx(() => TextField(
-                            controller: controller.passwordController,
-                            obscureText: controller.isObscured.value,
-                            decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle: TextStyle(color: Colors.white),
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Colors.white, width: 2.0),
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  controller.isObscured.value
-                                      ? Icons.visibility_off
-                                      : Icons.visibility,
-                                  color: Colors.white,
-                                ),
-                                onPressed: controller.toggleObscureText,
-                              ),
-                            ),
-                          )),
-                      SizedBox(
-                        height: 15,
-                      ),
                       Container(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            controller.login(
-                              controller.emailController.text,
-                              controller.passwordController.text,
-                            );
+                            controller
+                                .resetPassword(controller.emailController.text);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "Login",
+                                "Confirm",
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 20,
@@ -131,37 +100,7 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: TextButton(
-                          onPressed: () {
-                            Get.toNamed(Routes.RESET_PASSWORD);
-                          },
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
                     ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Padding(
-              padding: EdgeInsets.only(bottom: 20, left: 40),
-              child: TextButton(
-                onPressed: () {
-                  Get.toNamed(Routes.REGISTER);
-                },
-                child: Text(
-                  "Don't have an account? Register",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
                   ),
                 ),
               ),
