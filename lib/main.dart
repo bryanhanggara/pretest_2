@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
             initialRoute:
-                snapshot.data != null ? AppPages.INITIAL : AppPages.Login,
+                snapshot.data != null ? AppPages.Splash : AppPages.Login,
             getPages: AppPages.routes,
           );
         }

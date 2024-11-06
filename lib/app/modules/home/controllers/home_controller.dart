@@ -23,4 +23,14 @@ class HomeController extends GetxController {
     Get.off(() => LoginView());
   }
 
+  Future<void> deleteMoment(String docId) async {
+    try {
+      await firestore.collection('moments').doc(docId).delete();
+      Get.snackbar("Sukses", "Momen berhasil dihapus.");
+    } catch (e) {
+      print("Error deleting moment: $e");
+      Get.snackbar("Gagal", "Tidak bisa menghapus momen.");
+    }
+  }
+
 }
